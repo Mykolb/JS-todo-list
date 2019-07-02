@@ -16,6 +16,8 @@ const taskInput = document.querySelector('#task')
 const loadEventListeners = () => {
     //add task event
     form.addEventListener('submit', addTask)
+    // remove task event
+    taskList.addEventListener('click', removeTask)
 }
 
 //add task
@@ -44,6 +46,18 @@ const addTask = (event) => {
     taskList.appendChild(li)
     //clear input
     taskInput.value = ''
+}
+
+//remove task working!
+const removeTask = (event) => {
+   //classList has access to remove, add and toggle method
+    if(event.target.parentElement.classList.contains('delete-item')) {
+        console.log(event.target) 
+        if(confirm('Confirm: Are you sure you want to delete this item?')) {
+            
+        }
+    }
+    event.target.parentElement.parentElement.remove()
 }
 
 loadEventListeners();

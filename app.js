@@ -14,6 +14,8 @@ const taskInput = document.querySelector('#task')
 
 //load all event listeners
 const loadEventListeners = () => {
+    //dom load vent
+    document.addEventListener('DOMContentLoaded', getTasks)
     //add task event
     form.addEventListener('submit', addTask)
     // remove task event
@@ -24,7 +26,31 @@ const loadEventListeners = () => {
     filter.addEventListener('keyup', filterTasks)
 }
 
+//get taks from ls Working
+const getTasks = () => {
+    let tasks;
+    localStorage.getItem('tasks') === null ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'))  
+    
 
+    tasks.forEach(task => {
+        // create li element
+        const li = document.createElement('li')
+        //add class, need collection class item b/c of material ui
+        li.className = 'collection-item'
+        //create text node and append 
+        li.appendChild(document.createTextNode(task))
+        //create new link element
+        const link = document.createElement('a')
+        //add class to a tag
+        link.className = 'delete-item secondary-content'
+        //add icon html
+        link.innerHTML = '<i class="fa fa-remove"></i>'
+        //append the link to li
+        li.appendChild(link)
+        //append li to ul 
+        taskList.appendChild(li)
+    })
+}
 
 
 //add task
@@ -35,7 +61,7 @@ const addTask = (event) => {
         alert('Please add a task')
     }
   
-// create li element
+    // create li element
     const li = document.createElement('li')
     //add class, need collection class item b/c of material ui
     li.className = 'collection-item'
@@ -60,7 +86,7 @@ const addTask = (event) => {
 
 
 
-//store task
+//store task WORKING!!
 const storeInLocalStorage = task => {
    let tasks;
     localStorage.getItem('tasks') === null ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks')); {   

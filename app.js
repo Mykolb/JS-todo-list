@@ -5,6 +5,8 @@ const taskList = document.querySelector('.collection')
 const clearBtn = document.querySelector('.clear-tasks')
 const filter = document.querySelector('#filter')
 const taskInput = document.querySelector('#task')
+//add event listeners for deleting items
+
 
 //create fn to loadd event listeners
 

@@ -26,7 +26,7 @@ const loadEventListeners = () => {
     filter.addEventListener('keyup', filterTasks)
 }
 
-//get taks from ls Working
+//get task from ls Working
 const getTasks = () => {
     let tasks;
     localStorage.getItem('tasks') === null ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'))  
@@ -135,7 +135,7 @@ const removeTaskFromLocalStorage = taskItem => {
         } 
     })
     localStorage.setItem('tasks', JSON.stringify(tasks)) 
-
+}
 
 console.log(removeTaskFromLocalStorage)
 
@@ -149,8 +149,13 @@ const clearTasks = () => {
     while(taskList.firstChild) {
         taskList.removeChild(taskList.firstChild)
     }
-    console.log(clearTasks)
+    //clear from ls
+    clearTasksFromLocalStorage()
 }
+
+//clear tasks from ls
+const clearTasksFromLocalStorage = () => {
+    localStorage.clear()
 }
 
 //filter tasks fn
@@ -164,7 +169,7 @@ const filterTasks = event => {
       return item.toLowerCase().indexOf(text) != -1 ? task.style.display = 'block' : task.style.display = 'none'
     })
 }
-    // console.log(filterTasks)
+    console.log(filterTasks)
 
 
 

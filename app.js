@@ -55,6 +55,19 @@ const addTask = (event) => {
     taskInput.value = ''
 }
 
+
+
+//store task
+const storeInLocalStorage = (task) => {
+   let tasks;
+    localStorage.getItem('tasks') === null ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'))
+    tasks.push(task)
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
+//store in local storage
+storeInLocalStorage(taskInput.value)
+
 //remove task working!
 const removeTask = (event) => {
    //classList has access to remove, add and toggle method

@@ -5,7 +5,7 @@ const taskList = document.querySelector('.collection')
 const clearBtn = document.querySelector('.clear-tasks')
 const filter = document.querySelector('#filter')
 const taskInput = document.querySelector('#task')
-//add event listeners for deleting items
+
 
 
 //create fn to loadd event listeners
@@ -18,7 +18,14 @@ const loadEventListeners = () => {
     form.addEventListener('submit', addTask)
     // remove task event
     taskList.addEventListener('click', removeTask)
+    //clear task event
+    clearBtn.addEventListener('click', clearTasks)
+    //filter tasks
+    filter.addEventListener('keyup', filterTasks)
 }
+
+
+
 
 //add task
 const addTask = (event) => {
@@ -54,12 +61,38 @@ const removeTask = (event) => {
     if(event.target.parentElement.classList.contains('delete-item')) {
         console.log(event.target) 
         if(confirm('Confirm: Are you sure you want to delete this item?')) {
-            
+
         }
     }
     event.target.parentElement.parentElement.remove()
 }
 
+//clear fn
+const clearTasks = () => {
+    // taskList.innerHTML = '' one way to clear it 
+
+    //faster
+    while(taskList.firstChild) {
+        taskList.removeChild(taskList.firstChild)
+    }
+}
+
+//filter tasks fn
+const filterTasks = (event) => {
+    const text = event.target.value.toLowerCase()
+    console.log('keys pressed', text)
+
+    document.querySelectorAll('.collection-item').forEach(task => { 
+        const item = task.firstChild.textContent
+        console.log('looking for item', item)
+      return item.toLowerCase().indexOf(text) != -1 ? task.style.display = 'block' : task.style.display = 'none'
+    })
+}
+    console.log(filterTasks)
+
+
+
+
 loadEventListeners();
- console.log(taskInput)
+//  console.log(taskInput)
  

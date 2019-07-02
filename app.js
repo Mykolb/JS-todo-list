@@ -51,6 +51,9 @@ const addTask = (event) => {
     li.appendChild(link)
     //append li to ul 
     taskList.appendChild(li)
+
+    //store in local storage
+    storeInLocalStorage(taskInput.value)
     //clear input
     taskInput.value = ''
 }
@@ -58,15 +61,28 @@ const addTask = (event) => {
 
 
 //store task
-const storeInLocalStorage = (task) => {
+const storeInLocalStorage = task => {
    let tasks;
-    localStorage.getItem('tasks') === null ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'))
-    tasks.push(task)
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-}
+    localStorage.getItem('tasks') === null ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks')); {   
+    }
 
-//store in local storage
-storeInLocalStorage(taskInput.value)
+     tasks.push(task)
+    localStorage.setItem('tasks', JSON.stringify(tasks)) 
+
+//    if(localStorage.getItem('tasks') === null) {
+//        tasks = []
+//    } else {
+//     tasks = JSON.parse(localStorage.getItem('tasks'))
+//    }
+//     tasks.push(task)
+//     localStorage.setItem('tasks', JSON.stringify(tasks)) 
+
+    console.log(tasks)
+    // tasks.Array.isArry(tasks)//giving me the number 11 in console LOCAL STORAGE NEEDED TO BE CLEARED! 
+    }
+
+
+
 
 //remove task working!
 const removeTask = (event) => {
@@ -91,7 +107,7 @@ const clearTasks = () => {
 }
 
 //filter tasks fn
-const filterTasks = (event) => {
+const filterTasks = event => {
     const text = event.target.value.toLowerCase()
     console.log('keys pressed', text)
 

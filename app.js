@@ -117,10 +117,29 @@ const removeTask = (event) => {
         console.log(event.target) 
         if(confirm('Confirm: Are you sure you want to delete this item?')) {
 
+            event.target.parentElement.parentElement.remove()
+            //remove from local storage
+            removeTaskFromLocalStorage(event.target.parentElement.parentElement)
         }
     }
-    event.target.parentElement.parentElement.remove()
 }
+
+//remove from ls
+const removeTaskFromLocalStorage = taskItem => {
+    let tasks;
+    localStorage.getItem('tasks') === null ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks')) 
+
+    tasks.forEach((task, index) =>  {
+        if(taskItem.textContent === task) {
+            tasks.splice(index, 1) 
+        } 
+    })
+    localStorage.setItem('tasks', JSON.stringify(tasks)) 
+
+
+console.log(removeTaskFromLocalStorage)
+
+
 
 //clear fn
 const clearTasks = () => {
@@ -130,6 +149,8 @@ const clearTasks = () => {
     while(taskList.firstChild) {
         taskList.removeChild(taskList.firstChild)
     }
+    console.log(clearTasks)
+}
 }
 
 //filter tasks fn
@@ -143,7 +164,7 @@ const filterTasks = event => {
       return item.toLowerCase().indexOf(text) != -1 ? task.style.display = 'block' : task.style.display = 'none'
     })
 }
-    console.log(filterTasks)
+    // console.log(filterTasks)
 
 
 
